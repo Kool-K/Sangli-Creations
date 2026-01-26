@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sangli Creations | Authentic Indian Home Decor</title>
+    <link rel="icon" href="assets/logo.jpeg" type="image/png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-top">
+            <button class="hamburger" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="logo-container" onclick="filterCategory('all')">
+                <img src="assets/logo.jpeg" alt="Sangli Creations Logo" class="site-logo">
+                <span class="site-title">Sangli Creations</span>
+            </div>
+
+            <div class="header-actions">
+                <div class="wishlist-icon" onclick="toggleWishlist()">
+                    <i class="fa-regular fa-heart"></i>
+                    <span id="wishlist-count" class="badge">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-bar-container">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search for brass, bedsheets, decor..." onkeyup="filterProducts()">
+            </div>
+        </div>
+
+        <nav id="main-nav" class="nav-menu">
+            <button class="close-menu" onclick="toggleMenu()">&times;</button>
+            <ul>
+                <li><a href="#" class="nav-link active" data-nav="all" onclick="filterCategory('all')">Home</a></li>
+                <li><a href="#" class="nav-link" data-nav="Brass" onclick="filterCategory('Brass')">Brass Items</a></li>
+                <li><a href="#" class="nav-link" data-nav="Textile" onclick="filterCategory('Textile')">Bedsheets/Blankets</a></li>
+                <li><a href="#" class="nav-link" data-nav="Decor" onclick="filterCategory('Decor')">Home Decor</a></li>
+                <li><a href="#" class="nav-link" data-nav="Rangoli" onclick="filterCategory('Rangoli')">Rangoli Tiles</a></li>
+                <li><a href="#" class="nav-link" data-nav="Gifts" onclick="filterCategory('Gifts')">Return Gifts</a></li>
+                <li><a href="#" class="nav-link" data-nav="About" onclick="showAboutPage()">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="overlay" onclick="toggleMenu()"></div>
+    </header>
+
+    <main>
+        <section class="controls-section">
+            <div class="section-title">
+                <h2 id="page-title">All Products</h2>
+                <span id="result-count">Showing 15 items</span>
+            </div>
+            <div class="sort-wrapper">
+                <label>Sort by:</label>
+                <select id="sortSelect" onchange="sortProducts()">
+                    <option value="featured">Featured</option>
+                    <option value="az">Alphabetically, A-Z</option>
+                    <option value="za">Alphabetically, Z-A</option>
+                </select>
+            </div>
+        </section>
+
+        <section id="product-grid" class="product-grid">
+            </section>
+
+        <section id="about-section" class="about-section">
+            <div class="royal-container">
+                <div class="ornamental-divider"><i class="fa-solid fa-om"></i></div>
+                <h2>Our Heritage</h2>
+                <p class="lead-text">Welcome to Sangli Creations, where every artifact tells a story of India's glorious past.</p>
+                <div class="about-content">
+                    <p>Founded with a passion for preserving ancient craftsmanship, Sangli Creations brings the soul of Indian artistry to your modern home. From the intricate brass work of Moradabad to the vibrant textiles of Jaipur, our collection is a curated journey through the heart of India.</p>
+                    <p>We believe that decor is not just about aesthetics; it is about emotion, culture, and the warmth of tradition. Whether it is a hand-carved Ganesha idol for your altar or a block-printed bedsheet for your sanctuary, we ensure authenticity in every thread and casting.</p>
+                </div>
+                <div class="ornamental-divider"><i class="fa-solid fa-om"></i></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="wishlist-sidebar" class="wishlist-sidebar">
+        <div class="wishlist-header">
+            <h3>My Wishlist <i class="fa-solid fa-heart"></i></h3>
+            <button onclick="toggleWishlist()">&times;</button>
+        </div>
+        <div id="wishlist-items" class="wishlist-items">
+            <p class="empty-msg">Your wishlist is empty.</p>
+        </div>
+        <div class="wishlist-footer">
+            <button class="enquire-all-btn" onclick="enquireWishlist()">
+                <i class="fa-brands fa-whatsapp"></i> Enquire About List
+            </button>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Sangli Creations</h3>
+                <p>Authentic Indian Home Decor. Bringing tradition to your doorstep with our curated collection of brass, textiles, and artifacts.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fa-solid fa-phone"></i> +61 469 029 362</p>
+                <p><i class="fa-solid fa-envelope"></i> contact@sanglicreations.co</p>
+                <p><i class="fa-solid fa-location-dot"></i> Girraween, NSW</p>
+                <a href="https://wa.me/61469029362" target="_blank" class="footer-wa-btn">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sangli Creations. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
