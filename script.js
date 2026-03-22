@@ -16,6 +16,10 @@ const products = [
 
 // --- APP STATE ---
 let wishlist = JSON.parse(localStorage.getItem('sangliWishlist')) || [];
+// Migrate old array of numbers to array of objects
+wishlist = wishlist.map(item => typeof item === 'number' ? { id: item, qty: 1 } : item);
+
+let productQuantities = {};
 let currentCategory = 'all';
 
 // --- INITIALIZATION ---
@@ -38,7 +42,11 @@ function renderProducts(items) {
     }
 
     items.forEach(product => {
-        const isWishlisted = wishlist.includes(product.id) ? 'active' : '';
+        const wishlistItem = wishlist.find(w => w.id === product.id);
+        const isWishlisted = !!wishlistItem ? 'active' : '';
+        const qty = productQuantities[product.id] || (wishlistItem ? wishlistItem.qty : 1);
+        productQuantities[product.id] = qty;
+
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
@@ -49,18 +57,43 @@ function renderProducts(items) {
             <div class="card-details">
                 <span class="card-cat">${product.categories[0]}</span>
                 <h3 class="card-title">${product.name}</h3>
+                
+                <div class="quantity-stepper">
+                    <button class="qty-btn" onclick="updateQuantity(event, ${product.id}, -1)">-</button>
+                    <span id="qty-${product.id}" class="qty-display">${qty}</span>
+                    <button class="qty-btn" onclick="updateQuantity(event, ${product.id}, 1)">+</button>
+                </div>
+
                 <div class="card-actions">
-                    <button class="btn-enquire" onclick="enquireProduct('${product.name}')">
+                    <button class="btn-enquire" onclick="enquireProduct('${product.name}', ${product.id})">
                         <i class="fa-brands fa-whatsapp"></i> Enquire
                     </button>
-                    <button class="btn-wishlist ${isWishlisted}" onclick="toggleWishlistItem(${product.id}, this)">
-                        <i class="fa-${isWishlisted ? 'solid' : 'regular'} fa-heart"></i>
+                    <button class="btn-wishlist ${isWishlisted}" title="${isWishlisted ? 'Remove from Cart' : 'Add to Cart'}" onclick="toggleWishlistItem(${product.id}, this)">
+                        <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                 </div>
             </div>
         `;
         grid.appendChild(card);
     });
+}
+
+function updateQuantity(e, id, change) {
+    if (e) e.stopPropagation();
+    let currentQty = productQuantities[id] || 1;
+    let newQty = currentQty + change;
+    if (newQty < 1) newQty = 1;
+    productQuantities[id] = newQty;
+    
+    const display = document.getElementById(`qty-${id}`);
+    if (display) display.innerText = newQty;
+
+    const wishItem = wishlist.find(w => w.id === id);
+    if (wishItem) {
+        wishItem.qty = newQty;
+        localStorage.setItem('sangliWishlist', JSON.stringify(wishlist));
+        updateWishlistUI();
+    }
 }
 
 // --- FILTER & VIEW SWITCHING LOGIC ---
@@ -122,23 +155,26 @@ function updateNavHighlight(identifier) {
 
 // --- WISHLIST LOGIC ---
 function toggleWishlistItem(id, btnElement) {
-    const isAdding = !wishlist.includes(id);
+    const existingIndex = wishlist.findIndex(w => w.id === id);
+    const isAdding = existingIndex === -1;
 
     if (isAdding) {
-        wishlist.push(id);
+        const qty = productQuantities[id] || 1;
+        wishlist.push({ id, qty });
     } else {
-        wishlist = wishlist.filter(itemId => itemId !== id);
+        wishlist.splice(existingIndex, 1);
     }
 
-    // Only update the icon if the button clicked is a heart button (not the "Remove" text in sidebar)
+    // Only update the icon if the button clicked is a cart button (not the "Remove" text in sidebar)
     if (btnElement && btnElement.classList.contains('btn-wishlist')) {
         if (isAdding) {
             btnElement.classList.add('active');
-            btnElement.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            btnElement.title = 'Remove from Cart';
         } else {
             btnElement.classList.remove('active');
-            btnElement.innerHTML = '<i class="fa-regular fa-heart"></i>';
+            btnElement.title = 'Add to Cart';
         }
+        btnElement.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
     }
 
     localStorage.setItem('sangliWishlist', JSON.stringify(wishlist));
@@ -157,16 +193,16 @@ function updateWishlistUI() {
     countBadge.innerText = wishlist.length;
 
     if (wishlist.length === 0) {
-        wishlistContainer.innerHTML = '<p class="empty-msg">Your wishlist is empty.</p>';
+        wishlistContainer.innerHTML = '<p class="empty-msg">Your cart is empty.</p>';
     } else {
-        wishlistContainer.innerHTML = wishlist.map(id => {
-            const item = products.find(p => p.id === id);
-            // FIX: Changed item.image1 to item.image
+        wishlistContainer.innerHTML = wishlist.map(wItem => {
+            const item = products.find(p => p.id === wItem.id);
+            if (!item) return '';
             return `
                 <div class="wishlist-item">
                     <img src="${item.image}" alt="${item.name}">
                     <div class="wishlist-item-info">
-                        <h4>${item.name}</h4>
+                        <h4>${item.name} <span style="font-size: 0.85rem; color: var(--gold-dark);">(x${wItem.qty})</span></h4>
                         <span class="remove-btn" onclick="toggleWishlistItem(${item.id}, this)">Remove</span>
                     </div>
                 </div>
@@ -182,18 +218,20 @@ function toggleWishlist() {
 // --- WHATSAPP ---
 const PHONE_NUMBER = "61469029362"; 
 
-function enquireProduct(name) {
-    const text = `Hello Sangli Creations, I am interested in knowing more about: ${name}`;
+function enquireProduct(name, id) {
+    const qty = productQuantities[id] || 1;
+    const text = `Hello Sangli Creations, I am interested in knowing more about: ${qty}x ${name}`;
     window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
 }
 
 function enquireWishlist() {
-    if (wishlist.length === 0) return alert("Wishlist is empty!");
-    const items = wishlist.map(id => {
-        const p = products.find(prod => prod.id === id);
-        return `- ${p.name}`;
+    if (wishlist.length === 0) return alert("Cart is empty!");
+    const items = wishlist.map(wItem => {
+        const p = products.find(prod => prod.id === wItem.id);
+        if (!p) return '';
+        return `- ${wItem.qty}x ${p.name}`;
     }).join('\n');
-    const text = `Hello! I would like to enquire about the following items in my wishlist:\n${items}`;
+    const text = `Hello! I would like to enquire about the following items in my cart:\n${items}`;
     window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
 }
 

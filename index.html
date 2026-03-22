@@ -28,7 +28,7 @@
 
             <div class="header-actions">
                 <div class="wishlist-icon" onclick="toggleWishlist()">
-                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
                     <span id="wishlist-count" class="badge">0</span>
                 </div>
             </div>
@@ -76,30 +76,61 @@
             </section>
 
         <section id="about-section" class="about-section">
-            <div class="royal-container">
-                <div class="ornamental-divider"><i class="fa-solid fa-om"></i></div>
-                <h2>Our Heritage</h2>
-                <p class="lead-text">Welcome to Sangli Creations, where every artifact tells a story of India's glorious past.</p>
-                <div class="about-content">
-                    <p>Founded with a passion for preserving ancient craftsmanship, Sangli Creations brings the soul of Indian artistry to your modern home. From the intricate brass work of Moradabad to the vibrant textiles of Jaipur, our collection is a curated journey through the heart of India.</p>
-                    <p>We believe that decor is not just about aesthetics; it is about emotion, culture, and the warmth of tradition. Whether it is a hand-carved Ganesha idol for your altar or a block-printed bedsheet for your sanctuary, we ensure authenticity in every thread and casting.</p>
+            <div class="about-hero">
+                <div class="divine-symbols">
+                    <span class="symbol">॥ श्री ॥</span>
                 </div>
-                <div class="ornamental-divider"><i class="fa-solid fa-om"></i></div>
+                <h2>Our Divine Heritage</h2>
+                <p class="lead-text">Welcome to Sangli Creations, a premier destination for authentic Indian home decor. We bring the warmth and timeless elegance of our rich cultural history directly to you, curating exquisite brass artifacts, traditional textiles, and bespoke rangoli art for your modern sanctuary.</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-text-content">
+                    <div class="ornamental-icon"><i class="fa-solid fa-om"></i></div>
+                    <h3>A Curated Journey</h3>
+                    <p>Founded with a profound passion for preserving ancient craftsmanship, Sangli Creations brings the soul of traditional Indian artistry directly to your modern sanctuary.</p>
+                    <p>From the intricate, hand-carved brass workings of Moradabad to the vibrant, historically rich textiles of Jaipur, our collection serves as a pristine bridge to the heart of India.</p>
+                    <p>We believe that your home should be an extension of your spirit. That is why we dedicate ourselves to ensuring authenticity in every casting, thread, and carving we offer.</p>
+                </div>
+                
+                <div class="about-features">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-hands-holding-circle"></i>
+                        <div class="feature-card-text">
+                            <h4>Master Craftsmanship</h4>
+                            <p>Authentic pieces crafted by multi-generational artisans.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-crown"></i>
+                        <div class="feature-card-text">
+                            <h4>Royal Aesthetic</h4>
+                            <p>Curated designs that bring vintage elegance to modern spaces.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-leaf"></i>
+                        <div class="feature-card-text">
+                            <h4>Timeless Quality</h4>
+                            <p>Materials and techniques that endure through lifetimes.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <div id="wishlist-sidebar" class="wishlist-sidebar">
         <div class="wishlist-header">
-            <h3>My Wishlist <i class="fa-solid fa-heart"></i></h3>
+            <h3>My Cart <i class="fa-solid fa-cart-shopping"></i></h3>
             <button onclick="toggleWishlist()">&times;</button>
         </div>
         <div id="wishlist-items" class="wishlist-items">
-            <p class="empty-msg">Your wishlist is empty.</p>
+            <p class="empty-msg">Your cart is empty.</p>
         </div>
         <div class="wishlist-footer">
             <button class="enquire-all-btn" onclick="enquireWishlist()">
-                <i class="fa-brands fa-whatsapp"></i> Enquire About List
+                <i class="fa-brands fa-whatsapp"></i> Enquire About Cart
             </button>
         </div>
     </div>

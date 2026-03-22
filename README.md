@@ -1,97 +1,77 @@
-# Sangli Creations - Official Website
+# 🪷 Sangli Creations
 
-> **A premium, responsive e-commerce catalog for Authentic Indian Home Decor.**
+> **A premium, responsive digital catalog & e-commerce experience for Authentic Indian Home Decor.**
 
-![Status](https://img.shields.io/badge/Status-Prototype%20Ready-success)
-![Platform](https://img.shields.io/badge/Platform-Web-blue)
+![Status](https://img.shields.io/badge/Status-Prototype%20Ready-success?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge)
+
+<br>
 
 ## 📖 Overview
 
-This repository contains the source code for the **Sangli Creations** website. It is designed as a **Single Page Application (SPA)** that provides a seamless, app-like experience for browsing products, managing wishlists, and making direct enquiries via WhatsApp.
+Welcome to the **Sangli Creations** web application. Designed as a frictionless **Single Page Application (SPA)**, this platform provides a luxurious, app-like experience for discovering premium Indian heritage goods—ranging from intricate brass murtis to vibrant Jaipuri textiles.
 
-The design reflects the brand's heritage with a **"Royal Indian" aesthetic**, utilizing a Maroon & Gold color palette, ornate typography, and high-quality imagery.
+The application reflects the brand's distinguished heritage with a **"Royal Indian" aesthetic**, utilizing a rich Maroon & Temple Gold color palette, ornate typography, and a highly polished UI that breathes life into the artifacts.
 
-## 🌟 Key Features
+## ✨ Signature Features
 
-* **📱 Fully Responsive Design:** Optimized for all devices.
-    * *Desktop:* Full navigation bar and hover effects.
-    * *Tablet (iPad):* Smart adaptive layout with touch-friendly spacing.
-    * *Mobile:* App-style interface with a slide-out hamburger menu.
-* **🔍 Advanced Product Discovery:**
-    * **Live Search:** Instantly find products by name or category.
-    * **Smart Filtering:** Filter by categories (Brass, Textiles, Decor, etc.).
-    * **Sorting:** Sort items by Featured, A-Z, or Z-A.
-* **❤️ Persistent Wishlist:**
-    * Customers can "heart" items to add them to a wishlist.
-    * The list is **saved automatically** to the user's device (no login required).
-    * **"Enquire All"** button sends a single WhatsApp message with the entire list.
-* **💬 Direct WhatsApp Integration:**
-    * Replaces the traditional "Add to Cart" with a direct "Enquire" button.
-    * Opens a pre-filled WhatsApp chat with the specific product name.
-* **✨ Interactive UI:**
-    * **Zoom & Slide:** Hovering over product cards reveals a second image and zooms in.
-    * **Seamless Navigation:** "About Us" and other pages load instantly without refreshing.
+* **📱 Flawless Responsive Design:** Beautifully optimized across all screens.
+  * *Desktop:* Expansive grids, glass-like modal zooms, and seamless hover interactions.
+  * *Mobile:* App-style navigation with a fluid slide-out menu and touch-friendly steppers.
+* **🛒 Dynamic Cart & Enquiries:**
+  * Customers build a "Cart" of desired products complete with **Quantity Steppers**.
+  * Replaces standard checkouts with a **Direct WhatsApp Integration**. 
+  * Instantly generates a formatted WhatsApp draft outlining the requested items and quantities.
+* **🔍 Instant Product Discovery:**
+  * **Live Search:** Millisecond-fast filtering by name, tag, or category.
+  * **Smart Filtering:** Effortless toggling between 'Brass Items', 'Textiles', 'Rangoli', etc.
+  * **Sorting & Ordering:** Dynamic Alphabetical and Featured sorting mechanisms.
+* **🖼️ Immersive Zoom Experience:**
+  * Clicking on any product image triggers a stunning, cinematic full-screen modal without descriptions—allowing users to appreciate the fine craftsmanship.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-* **HTML5:** Semantic structure.
-* **CSS3:** Custom styling with CSS Variables for consistent theming.
-* **JavaScript (ES6):** Logic for filtering, sorting, wishlist management, and view switching.
-* **FontAwesome:** For vector icons (hearts, search, social media).
-* **Google Fonts:** *Playfair Display* (Headings) and *Lato* (Body text).
+| Technology | Purpose |
+| :--- | :--- |
+| **HTML5** | Semantic, accessible DOM structure |
+| **Vanilla CSS3** | Custom theming, CSS variables, keyframe animations, and flex/grid layouts |
+| **Modern JS (ES6)** | DOM manipulation, state management (`productQuantities`, cart arrays), and view routing |
+| **LocalStorage** | Persistent, session-less cart data storage |
+| **FontAwesome** | High-quality vector iconography |
 
 ---
 
-## 🚀 Setup & Deployment
+## 🚀 Setup & Local Deployment
 
 ### 1. Local Development
-To run this project on your computer:
-1.  Clone this repository.
-2.  Ensure you have an `assets` folder with your product images (`image1.png`, `image2.png`, etc.) and the logo (`image_7b61a5.png`).
-3.  Open `index.html` in any modern web browser (Chrome, Safari, Edge).
+Running this project locally is incredibly simple—no build tools required:
+1. Clone this repository to your local machine.
+2. Ensure you have the `assets` directory populated with your high-res product photos and the company logo (`logo.jpeg`).
+3. Open `index.html` directly in any modern browser to view the app instantly.
 
-### 2. Deployment (GitHub Pages)
-This project is ready for instant hosting via GitHub Pages for client preview.
-1.  Go to the **Settings** tab of this repository.
-2.  Scroll to **Pages**.
-3.  Under **Source**, select `main` (or `master`) branch.
-4.  Click **Save**.
-5.  Share the generated link with the client.
-
-### 3. Domain Migration (Future Step)
-Since the domain has already been purchased:
-1.  In GitHub Pages settings, enter the custom domain (e.g., `www.sanglicreations.com`).
-2.  Update the DNS settings (A records/CNAME) at the domain registrar to point to GitHub's servers.
+### 2. Live Hosting (GitHub Pages)
+The architecture is inherently static, making it perfect for rapid, free hosting:
+1. Navigate to your repository **Settings** → **Pages**.
+2. Set the Source to the `main` branch.
+3. Save, and your site is live globally in minutes.
 
 ---
 
-## 📂 Project Structure
+## 🎨 Design System
 
-```text
-/
-├── index.html       # Main structure and content
-├── style.css        # Visual styling, colors, and responsive rules
-├── script.js        # Logic for wishlist, sorting, and data
-├── README.md        # Documentation
-├── image_7b61a5.png # Website Favicon & Logo
-└── assets/          # Folder containing product images
-    ├── image1.png
-    ├── image2.png
-    └── ...
+The platform's aesthetic is governed by a strict, culturally resonant design system:
 
-```
-
-## 🎨 Color Palette Reference
-
-| Color Name | Hex Code | Usage |
+| Color Concept | Hex Value | Application |
 | :--- | :--- | :--- |
-| **Maroon** | `#800020` | Primary buttons, headers, borders |
-| **Temple Gold** | `#C0B283` | Accents, highlights, badges |
-| **Heritage Cream** | `#FDF5E6` | Backgrounds, cards |
-| **Charcoal** | `#333333` | Body text |
+| **Sacred Maroon** | `#800020` | Hero headers, primary buttons, borders, and branding elements |
+| **Deep Maroon** | `#4a0010` | Hover states and deep contrasts |
+| **Temple Gold** | `#C0B283` | Accents, ribbons, custom badges, and interactive highlights |
+| **Heritage Cream** | `#FDF5E6` | Soft, warm backgrounds for product cards and thematic containers |
+| **Charcoal Core** | `#333333` | Legible, high-contrast body typography |
 
-## 📞Support
-For technical support or updates, please contact the developer.
-Developed by: Ketaki Kulkarni
+---
+
+> **Built with passion to honor the art of India.**
+> *Developed by Ketaki Kulkarni*
