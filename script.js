@@ -42,7 +42,7 @@ function renderProducts(items) {
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
-            <div class="card-img-wrapper">
+            <div class="card-img-wrapper" onclick="openImageModal('${product.image}')" style="cursor: pointer;" title="Click to view image">
                 ${product.tag ? `<span class="ribbon">${product.tag}</span>` : ''}
                 <img src="${product.image}" alt="${product.name}" class="img-zoom">
             </div>
@@ -206,5 +206,27 @@ function toggleMenu(forceState = null) {
     } else {
         nav.classList.toggle('active');
         overlay.classList.toggle('active');
+    }
+}
+
+// --- IMAGE MODAL LOGIC ---
+function openImageModal(imgSrc) {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-image');
+    if (modal && modalImg) {
+        modalImg.src = imgSrc;
+        modal.classList.add('show');
+    }
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('image-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        // Clear src to prevent flashing old image next time
+        setTimeout(() => {
+            const modalImg = document.getElementById('modal-image');
+            if (modalImg) modalImg.src = '';
+        }, 300);
     }
 }
